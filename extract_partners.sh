@@ -43,7 +43,7 @@ for var in ${dailyVars}; do
       tmpfile="${basename}_${expname}_${var}_daily_${dt}.nc"
       if [ ! -f  ${workdir}/${tmpfile} ]; then
         cdo selvar,${var} ${inputdir}/ECE_${expname}_${dt}.nc ${workdir}/tmp.nc
-        if [ ${var}=="CP" ] || [ ${var}=="LSP" ]; then 
+        if [ ${var} == "CP" ] || [ ${var} == "LSP" ]; then
           cdo daysum -shifttime,-1sec ${workdir}/tmp.nc ${workdir}/tmp2.nc
         else
           cdo daymean -shifttime,-1sec ${workdir}/tmp.nc ${workdir}/tmp2.nc
@@ -71,13 +71,13 @@ for var in ${monthlyVars}; do
       tmpfile="${basename}_${expname}_${var}_monthly_${dt}.nc"
       if [ ! -f  ${workdir}/${tmpfile} ]; then
         cdo selvar,${var} ${inputdir}/ECE_${expname}_${dt}.nc ${workdir}/tmp.nc
-        if [ ${var}=="CP" ] || [ ${var}=="LSP" ]; then
+        if [ ${var} == "CP" ] || [ ${var} == "LSP" ]; then
           cdo daysum -shifttime,-1sec ${workdir}/tmp.nc ${workdir}/tmp2.nc
         else
           cdo daymean -shifttime,-1sec ${workdir}/tmp.nc ${workdir}/tmp2.nc
         fi
         cdo shifttime,1sec ${workdir}/tmp2.nc ${workdir}/tmp3.nc
-        if [ ${var}=="CP" ] || [ ${var}=="LSP" ]; then
+        if [ ${var} == "CP" ] || [ ${var} == "LSP" ]; then
           cdo monsum ${workdir}/tmp3.nc ${workdir}/tmp4.nc
         else
           cdo monmean ${workdir}/tmp3.nc ${workdir}/tmp4.nc
